@@ -1,11 +1,10 @@
 Package: TodaFunc
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Title: Convenient R functions for myself by myself
+Version: 0.0.9
+Author: Yusuke Toda
+Maintainer: Yusuke Toda <toda@ut-biomet.org>
+Description: Convenient R functions for myself by myself
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
