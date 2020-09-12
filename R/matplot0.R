@@ -1,12 +1,17 @@
 matplot0 <- function(
 
-  x, y, type = "l",
+  x = NULL, y, type = "l",
   lty = 1:5, lwd = 1, lend = par("lend"),
   pch = 1,
   col = 1:6, cex = 1, bg = 1,
   xlab = 'x', ylab = 'y', xlim = NULL, ylim = NULL
 
 ) {
+
+  # generate x
+  if (is.null(x)) {
+    x <- 1:nrow(y)
+  }
 
   # plot white space
   if (is.null(xlim)) xlim <- range(x, na.rm = TRUE)
