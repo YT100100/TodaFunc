@@ -1,4 +1,4 @@
-CreateOutputDirectory <- function(dirname_vec, add_today_folder = TRUE) {
+create_todays_directory <- function(dirname_vec, add_today_folder = TRUE) {
 
   # set directory names
   if (add_today_folder) {
