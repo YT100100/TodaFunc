@@ -6,7 +6,7 @@ create_todays_directory <- function(
   # set directory names
   if (add_today_folder) {
     folder <- gsub('-', '', Sys.Date())
-    if (explanation == '') {
+    if (explanation != '') {
       folder <- paste0(folder, '_', explanation)
     }
     dirname_vec <- c(dirname_vec, folder)
