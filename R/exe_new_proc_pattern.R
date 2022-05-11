@@ -8,7 +8,7 @@ remove_dup_row <- function(base_df, remove_df) {
     })
     return(any(is_matched))
   })
-  return(base_df[!is_duplicated, ])
+  return(base_df[!is_duplicated, , drop = FALSE])
 
 }
 
@@ -112,9 +112,11 @@ exe_new_proc_pattern <- function(
   exe_pattern <- remove_dup_row(exe_pattern, remove_pattern)
 
   # remove existing patterns
-  does_folder_exists <- length(list.files(outdir)) != 0
-  if (does_folder_exists) {
-    exist_pattern <- read.csv(paste0(outdir, '/ExecutedPatterns.csv'))
+  pattern_save_dir <- dirname(outdir)
+  is_pattern_file <- grepl('^ExecutedPatterns\\.csv$', list.files(pattern_save_dir))
+  if (any(is_pattern_file)) {
+    exist_pattern_raw <- read.csv(paste0(pattern_save_dir, '/ExecutedPatterns.csv'), row.names = 1)
+    exist_pattern <- exist_pattern_raw
     exist_pattern$folder <- NULL
     exe_pattern <- remove_dup_row(exe_pattern, exist_pattern)
   }
@@ -166,11 +168,11 @@ exe_new_proc_pattern <- function(
   }
 
   # output execution patterns
-  write.csv(exe_pattern_output, paste0(dirname(outdir), '/ExecutedPatterns.csv'))
+  if (any(is_pattern_file)) {
+    exe_pattern_output <- rbind(exist_pattern_raw, exe_pattern_output)
+  }
+  write.csv(exe_pattern_output, paste0(pattern_save_dir, '/ExecutedPatterns.csv'))
   cat('Finished.\n')
   return()
 
 }
-
-# 入力がない場合をチェック
-
