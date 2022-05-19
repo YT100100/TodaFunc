@@ -94,7 +94,7 @@ exe_new_proc_pattern <- function(
     # i_path <- 1
 
     # fetch paths of input files
-    paths_i <- list.files(input_path_vec[path_name], full.names = TRUE)
+    paths_i <- list.dirs(input_path_vec[path_name], recursive = FALSE, full.names = TRUE)
 
     # extend data frame to add paths
     exe_pattern_now <- exe_pattern
@@ -122,12 +122,14 @@ exe_new_proc_pattern <- function(
   }
 
   # cat execution patterns
-  cat('Detected', nrow(exe_pattern), 'patterns.\n')
+  n_pattern <- nrow(exe_pattern)
+  cat('Detected', n_pattern, 'patterns.\n')
+  if (n_pattern == 0) return()
 
   # execution
   exe_pattern_output <- exe_pattern
   exe_pattern_output$folder <- NA
-  for (i_pat in 1:nrow(exe_pattern)) {
+  for (i_pat in 1:n_pattern) {
     # i_pat <- 1
 
     t1 <- proc.time()
