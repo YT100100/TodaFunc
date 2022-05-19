@@ -44,7 +44,7 @@ convert_second_to_str <- function (totals) {
 
   second <- rests %% 60
   rests <- rests - second
-  second <- round(second, 2)
+  second <- round(second)
 
   minute <- rests %% 3600
   rests <- rests - minute
