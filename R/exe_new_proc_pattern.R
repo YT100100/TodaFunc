@@ -153,6 +153,7 @@ exe_new_proc_pattern <- function(
 
     # execution
     cat('Pattern', i_pat, 'is running.\n')
+    cat('  Processing starts:', as.character(Sys.time()), '\n')
     cat('  Function:', exe_func_name_i, '\n')
     if (is.null(input_path_vec)) {
       exe_func_i(outdir_i)
