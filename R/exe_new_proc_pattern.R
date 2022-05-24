@@ -84,28 +84,30 @@ exe_new_proc_pattern <- function(
   #'
   #' @export
 
-  # create execution pattern of functions
   if (is.null(exe_pattern)) {
+    
+    # create execution pattern of functions
     exe_pattern <- data.frame(exe_func = names(exe_func_list))
-  }
-
-  # create execution pattern of input paths
-  for (path_name in names(input_path_vec)) {
-    # i_path <- 1
-
-    # fetch paths of input files
-    paths_i <- list.dirs(input_path_vec[path_name], recursive = FALSE, full.names = TRUE)
-
-    # extend data frame to add paths
-    exe_pattern_now <- exe_pattern
-    for (iter in 1:length(paths_i)) {
-      if (iter == 1) next
-      exe_pattern <- rbind(exe_pattern, exe_pattern_now)
+    
+    # create execution pattern of input paths
+    for (path_name in names(input_path_vec)) {
+      # i_path <- 1
+      
+      # fetch paths of input files
+      paths_i <- list.dirs(input_path_vec[path_name], recursive = FALSE, full.names = TRUE)
+      
+      # extend data frame to add paths
+      exe_pattern_now <- exe_pattern
+      for (iter in 1:length(paths_i)) {
+        if (iter == 1) next
+        exe_pattern <- rbind(exe_pattern, exe_pattern_now)
+      }
+      
+      # add a column of input file paths
+      exe_pattern[[path_name]] <- rep(paths_i, each = nrow(exe_pattern_now))
+      
     }
-
-    # add a column of input file paths
-    exe_pattern[[path_name]] <- rep(paths_i, each = nrow(exe_pattern_now))
-
+    
   }
 
   # remove patterns which should not be executed
