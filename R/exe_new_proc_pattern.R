@@ -95,6 +95,9 @@ exe_new_proc_pattern <- function(
       
       # fetch paths of input files
       paths_i <- list.dirs(input_path_vec[path_name], recursive = FALSE, full.names = TRUE)
+      if (length(path_i) == 0) {
+        stop(paste0('No directories found in input_path_vec[', path_name, '].'))
+      }
       
       # extend data frame to add paths
       exe_pattern_now <- exe_pattern
