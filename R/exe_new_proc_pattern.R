@@ -66,23 +66,59 @@ convert_second_to_str <- function (totals) {
 
 }
 
+
+
+#' Executing sequential processing patterns which have not done before
+#'
+#' @param exe_func_list
+#' A named list of functions to be executed.
+#' Each functions should have `outdir` argument, a directory to save results.
+#' Names of this list is used in folders' name of results.
+#' If you use `input_path_vec` argument (see below), 
+#' functions should also have `input_dir` argument, a vector of directories to read data.
+#' This vector has the same names you used in `input_path_vec`,
+#' so you can use that names to specify elements in vector `input_dir` in your functions.
+#' 
+#' @param outdir
+#' A directory to save results (character).
+#' 
+#' @param input_path_vec
+#' A named vector of input directories (character).
+#' If you read data in functions in `exe_func_list`, 
+#' which are created by `exe_new_proc_pattern()`,
+#' please specify its directory using this argument.
+#' Each elements should be named, 
+#' so that you can access to each elements in functions in `exe_func_list`.
+#' If you read data which is not created with this function,
+#' you don't need to use this argument, just read it directly in your functions.
+#' 
+#' @param exe_pattern
+#' If you want to execute specific patterns of input directory and functions,
+#' you can specify that pattern as a data frame in `exe_pattern`.
+#' 
+#' @param remove_pattern
+#' If you want not to execute specific patterns of input directory and functions,
+#' you can specify that pattern as a data frame in `remove_pattern`.
+#'
+#' @details 
+#' This function executes functions in `exe_func_list` 
+#' using input data specified in `input_path_vec`.
+#' Folders to save results is automatically created in the directory specified with `outdir`.
+#' Information of each execution is recorded in folders' names, such as
+#' [outdir]__[function_name]__[name_of_input_directory_1]__[name_of_input_directory_2]...
+#'
+#' @return
+#' NULL.
+#'
+#' @export
+
 exe_new_proc_pattern <- function(
-  input_path_vec = NULL,
   exe_func_list,
   outdir,
+  input_path_vec = NULL,
   exe_pattern = NULL,
   remove_pattern = NULL
 ) {
-
-  #' Executing sequential processing patterns which have not done before
-  #'
-  #' @param input_path_vec Lists of functions.
-  #' @param exe_func_list Lists of functions.
-  #' @param outdir Lists of functions.
-  #' @param remove_pattern A data frame indicating processing patterns
-  #' which should not be executed.
-  #'
-  #' @export
 
   if (is.null(exe_pattern)) {
     
