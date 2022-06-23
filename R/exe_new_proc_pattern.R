@@ -1,7 +1,13 @@
 remove_dup_row <- function(base_df, remove_df) {
 
   if (is.null(remove_df)) return(base_df)
-
+  remove_df <- remove_df[, match(colnames(base_df), colnames(remove_df))]
+  
+  for (i in 1:ncol(remove_df)) {
+    if (colnames(remove_df)[i] == 'exe_func') next
+    remove_df[[i]] <- gsub('/$', '', remove_df[[i]])
+  }
+  
   is_duplicated <- apply(base_df, 1, function(pexe) {
     is_matched <- apply(remove_df, 1, function(prem) {
       all(pexe == prem)
@@ -147,6 +153,10 @@ exe_new_proc_pattern <- function(
       
     }
     
+  } else {
+    
+    exe_pattern <- exe_pattern[, c('exe_func', names(input_path_vec))]
+    
   }
 
   # remove patterns which should not be executed
@@ -185,6 +195,7 @@ exe_new_proc_pattern <- function(
     } else {
       input_path_i <- unlist(exe_pattern[i_pat, -1])
       input_path_i <- paste0(input_path_i, '/')
+      names(input_path_i) <- colnames(exe_pattern)[-1]
     }
 
     # create output directory
