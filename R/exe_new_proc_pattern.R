@@ -225,7 +225,7 @@ exe_new_proc_pattern <- function(exe_func_list, outdir,
   }
 
   # output execution patterns
-  if (any(is_pattern_file)) {
+  if (any(is_pattern_file) & omit_past_pattern) {
     exe_pattern_output <- rbind(exist_pattern_raw, exe_pattern_output)
   }
   write.csv(exe_pattern_output, paste0(pattern_save_dir, '/ExecutedPatterns.csv'))
