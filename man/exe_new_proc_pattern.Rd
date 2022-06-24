@@ -9,7 +9,8 @@ exe_new_proc_pattern(
   outdir,
   input_path_vec = NULL,
   exe_pattern = NULL,
-  remove_pattern = NULL
+  remove_pattern = NULL,
+  redo_past_pattern = FALSE
 )
 }
 \arguments{
@@ -37,6 +38,9 @@ you can specify that pattern as a data frame in `exe_pattern`.}
 
 \item{remove_pattern}{If you want not to execute specific patterns of input directory and functions,
 you can specify that pattern as a data frame in `remove_pattern`.}
+
+\item{omit_past_pattern}{Logical (default = `TRUE`).
+If you want to redo patterns which was run in the past, set it `FALSE`.}
 }
 \value{
 NULL.

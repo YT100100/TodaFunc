@@ -105,6 +105,10 @@ convert_second_to_str <- function (totals) {
 #' @param remove_pattern
 #' If you want not to execute specific patterns of input directory and functions,
 #' you can specify that pattern as a data frame in `remove_pattern`.
+#' 
+#' @param omit_past_pattern
+#' Logical (default = `TRUE`).
+#' If you want to redo patterns which was run in the past, set it `FALSE`.
 #'
 #' @details 
 #' This function executes functions in `exe_func_list` 
@@ -118,13 +122,11 @@ convert_second_to_str <- function (totals) {
 #'
 #' @export
 
-exe_new_proc_pattern <- function(
-  exe_func_list,
-  outdir,
-  input_path_vec = NULL,
-  exe_pattern = NULL,
-  remove_pattern = NULL
-) {
+exe_new_proc_pattern <- function(exe_func_list, outdir,
+                                 input_path_vec = NULL,
+                                 exe_pattern = NULL,
+                                 remove_pattern = NULL,
+                                 redo_past_pattern = FALSE) {
 
   if (is.null(exe_pattern)) {
     
@@ -165,7 +167,7 @@ exe_new_proc_pattern <- function(
   # remove existing patterns
   pattern_save_dir <- dirname(outdir)
   is_pattern_file <- grepl('^ExecutedPatterns\\.csv$', list.files(pattern_save_dir))
-  if (any(is_pattern_file)) {
+  if (any(is_pattern_file) & omit_past_pattern) {
     exist_pattern_raw <- read.csv(paste0(pattern_save_dir, '/ExecutedPatterns.csv'), row.names = 1)
     exist_pattern <- exist_pattern_raw
     exist_pattern$folder <- NULL
