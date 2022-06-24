@@ -126,7 +126,7 @@ exe_new_proc_pattern <- function(exe_func_list, outdir,
                                  input_path_vec = NULL,
                                  exe_pattern = NULL,
                                  remove_pattern = NULL,
-                                 redo_past_pattern = FALSE) {
+                                 omit_past_pattern = TRUE) {
 
   if (is.null(exe_pattern)) {
     
