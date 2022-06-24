@@ -1,11 +1,14 @@
 Package: TodaFunc
 Type: Package
-Title: Convenient R functions for myself by myself
-Version: 0.0.9
+Title: Convenient R functions for myself
+Version: 0.0.9000
 Author: Yusuke Toda
-Maintainer: Yusuke Toda <toda@ut-biomet.org>
-Description: Convenient R functions for myself by myself
-License: What license is it under?
+Maintainer: Yusuke Toda <yusuke0320.research@gmail.com>
+Description: Convenient R functions for myself
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.2.0
+Imports: 
+    htmlwidgets,
+    plotly
