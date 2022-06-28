@@ -1,3 +1,10 @@
+#' Calculating RMSE (root mean squared error)
+#'
+#' @param obs A numeric vector of observed values.
+#' @param fit A numeric vector of fitted values.
+#'
+#' @export
+
 rmse <- function (obs, fit) {
 
   selector <- (!is.na(obs)) & (!is.na(fit))

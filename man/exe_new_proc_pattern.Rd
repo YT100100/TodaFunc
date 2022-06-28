@@ -10,7 +10,7 @@ exe_new_proc_pattern(
   input_path_vec = NULL,
   exe_pattern = NULL,
   remove_pattern = NULL,
-  redo_past_pattern = FALSE
+  omit_past_pattern = TRUE
 )
 }
 \arguments{
