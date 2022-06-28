@@ -1,7 +1,7 @@
 #' Create empty matrix with dimnames
 #'
 #' @param data Data for array.
-#' @param ... `dimnames`
+#' @param ... dimnames.
 #'
 #' @export
 
