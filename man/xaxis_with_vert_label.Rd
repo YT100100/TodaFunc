@@ -4,7 +4,7 @@
 \alias{xaxis_with_vert_label}
 \title{Add x-axis with vertical labels}
 \usage{
-xaxis_with_vert_label(at, labels, srt = 90, pos = 0.05)
+xaxis_with_vert_label(at, labels, srt = 90, pos = 0.05, adj = c(1, 0.5))
 }
 \arguments{
 \item{at}{Equivalent to `at` argument in `axis()` function.}
@@ -14,6 +14,9 @@ xaxis_with_vert_label(at, labels, srt = 90, pos = 0.05)
 \item{srt}{An angle for label rotation.}
 
 \item{pos}{A parameter to adjust vertical positions of labels.}
+
+\item{adj}{A parameter to adjust relationship between coordinates of labels
+and actual positions of labels.}
 }
 \description{
 Add x-axis with vertical labels
