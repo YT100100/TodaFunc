@@ -1,13 +1,13 @@
 remove_dup_row <- function(base_df, remove_df) {
 
   if (is.null(remove_df)) return(base_df)
-  remove_df <- remove_df[, match(colnames(base_df), colnames(remove_df))]
-  
+  remove_df <- remove_df[, match(colnames(base_df), colnames(remove_df)), drop = FALSE]
+
   for (i in 1:ncol(remove_df)) {
     if (colnames(remove_df)[i] == 'exe_func') next
     remove_df[[i]] <- gsub('/$', '', remove_df[[i]])
   }
-  
+
   is_duplicated <- apply(base_df, 1, function(pexe) {
     is_matched <- apply(remove_df, 1, function(prem) {
       all(pexe == prem)
@@ -80,38 +80,38 @@ convert_second_to_str <- function (totals) {
 #' A named list of functions to be executed.
 #' Each functions should have `outdir` argument, a directory to save results.
 #' Names of this list is used in folders' name of results.
-#' If you use `input_path_vec` argument (see below), 
+#' If you use `input_path_vec` argument (see below),
 #' functions should also have `input_dir` argument, a vector of directories to read data.
 #' This vector has the same names you used in `input_path_vec`,
 #' so you can use that names to specify elements in vector `input_dir` in your functions.
-#' 
+#'
 #' @param outdir
 #' A directory to save results (character).
-#' 
+#'
 #' @param input_path_vec
 #' A named vector of input directories (character).
-#' If you read data in functions in `exe_func_list`, 
+#' If you read data in functions in `exe_func_list`,
 #' which are created by `exe_new_proc_pattern()`,
 #' please specify its directory using this argument.
-#' Each elements should be named, 
+#' Each elements should be named,
 #' so that you can access to each elements in functions in `exe_func_list`.
 #' If you read data which is not created with this function,
 #' you don't need to use this argument, just read it directly in your functions.
-#' 
+#'
 #' @param exe_pattern
 #' If you want to execute specific patterns of input directory and functions,
 #' you can specify that pattern as a data frame in `exe_pattern`.
-#' 
+#'
 #' @param remove_pattern
 #' If you want not to execute specific patterns of input directory and functions,
 #' you can specify that pattern as a data frame in `remove_pattern`.
-#' 
+#'
 #' @param omit_past_pattern
 #' Logical (default = `TRUE`).
 #' If you want to redo patterns which was run in the past, set it `FALSE`.
 #'
-#' @details 
-#' This function executes functions in `exe_func_list` 
+#' @details
+#' This function executes functions in `exe_func_list`
 #' using input data specified in `input_path_vec`.
 #' Folders to save results is automatically created in the directory specified with `outdir`.
 #' Information of each execution is recorded in folders' names, such as
@@ -129,36 +129,36 @@ exe_new_proc_pattern <- function(exe_func_list, outdir,
                                  omit_past_pattern = TRUE) {
 
   if (is.null(exe_pattern)) {
-    
+
     # create execution pattern of functions
     exe_pattern <- data.frame(exe_func = names(exe_func_list))
-    
+
     # create execution pattern of input paths
     for (path_name in names(input_path_vec)) {
       # i_path <- 1
-      
+
       # fetch paths of input files
       paths_i <- list.dirs(input_path_vec[path_name], recursive = FALSE, full.names = TRUE)
       if (length(paths_i) == 0) {
         stop(paste0('No directories found in input_path_vec[', path_name, '].'))
       }
-      
+
       # extend data frame to add paths
       exe_pattern_now <- exe_pattern
       for (iter in 1:length(paths_i)) {
         if (iter == 1) next
         exe_pattern <- rbind(exe_pattern, exe_pattern_now)
       }
-      
+
       # add a column of input file paths
       exe_pattern[[path_name]] <- rep(paths_i, each = nrow(exe_pattern_now))
-      
+
     }
-    
+
   } else {
-    
+
     exe_pattern <- exe_pattern[, c('exe_func', names(input_path_vec))]
-    
+
   }
 
   # remove patterns which should not be executed
