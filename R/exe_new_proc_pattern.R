@@ -157,7 +157,7 @@ exe_new_proc_pattern <- function(exe_func_list, outdir,
 
   } else {
 
-    exe_pattern <- exe_pattern[, c('exe_func', names(input_path_vec))]
+    exe_pattern <- exe_pattern[, c('exe_func', names(input_path_vec)), drop = FALSE]
 
   }
 
