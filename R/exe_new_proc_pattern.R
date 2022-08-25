@@ -218,17 +218,21 @@ exe_new_proc_pattern <- function(exe_func_list, outdir,
       exe_func_i(input_path_i, outdir_i)
     }
 
+    # output execution patterns
+    exe_pattern_output_i <- if (any(is_pattern_file) & omit_past_pattern) {
+      rbind(exist_pattern_raw, exe_pattern_output)
+    } else {
+      exe_pattern_output
+    }
+    exe_pattern_output_i <- subset(exe_pattern_output_i, !is.na(folder))
+    write.csv(exe_pattern_output_i,
+              paste0(pattern_save_dir, '/ExecutedPatterns.csv'))
+
     # print time
     proct <- convert_second_to_str((proc.time() - t1)[3])
     cat('  Processing time: ', proct, '\n', sep = '')
 
   }
-
-  # output execution patterns
-  if (any(is_pattern_file) & omit_past_pattern) {
-    exe_pattern_output <- rbind(exist_pattern_raw, exe_pattern_output)
-  }
-  write.csv(exe_pattern_output, paste0(pattern_save_dir, '/ExecutedPatterns.csv'))
   cat('Finished.\n')
   return()
 
