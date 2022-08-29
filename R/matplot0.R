@@ -1,3 +1,12 @@
+#' Expanded matplot()
+#'
+#' @details
+#' This function is very similar to `matplot()`,
+#' but removes NA when plotting.
+#'
+#' @export
+#'
+
 matplot0 <- function(
 
   x = NULL, y, type = "l",

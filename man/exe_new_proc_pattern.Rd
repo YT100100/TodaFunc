@@ -17,7 +17,7 @@ exe_new_proc_pattern(
 \item{exe_func_list}{A named list of functions to be executed.
 Each functions should have `outdir` argument, a directory to save results.
 Names of this list is used in folders' name of results.
-If you use `input_path_vec` argument (see below), 
+If you use `input_path_vec` argument (see below),
 functions should also have `input_dir` argument, a vector of directories to read data.
 This vector has the same names you used in `input_path_vec`,
 so you can use that names to specify elements in vector `input_dir` in your functions.}
@@ -25,10 +25,10 @@ so you can use that names to specify elements in vector `input_dir` in your func
 \item{outdir}{A directory to save results (character).}
 
 \item{input_path_vec}{A named vector of input directories (character).
-If you read data in functions in `exe_func_list`, 
+If you read data in functions in `exe_func_list`,
 which are created by `exe_new_proc_pattern()`,
 please specify its directory using this argument.
-Each elements should be named, 
+Each elements should be named,
 so that you can access to each elements in functions in `exe_func_list`.
 If you read data which is not created with this function,
 you don't need to use this argument, just read it directly in your functions.}
@@ -49,7 +49,7 @@ NULL.
 Executing sequential processing patterns which have not done before
 }
 \details{
-This function executes functions in `exe_func_list` 
+This function executes functions in `exe_func_list`
 using input data specified in `input_path_vec`.
 Folders to save results is automatically created in the directory specified with `outdir`.
 Information of each execution is recorded in folders' names, such as
