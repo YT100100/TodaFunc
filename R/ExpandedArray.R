@@ -24,7 +24,11 @@ call_expanded_array <- function() {
 
       },
 
-      initialize = function(data = NA, dim = length(data), diminfo) {
+      initialize = function(data = NA, dim = NULL, diminfo) {
+
+        if (is.null(dim)) {
+          dim <- if (is.null(dim(data))) length(data) else dim(data)
+        }
 
         stopifnot(identical(class(diminfo), 'list'))
         stopifnot(length(diminfo) == length(dim))
@@ -210,7 +214,7 @@ call_expanded_array <- function() {
 
 
 #### Example 2 ####
-#
+
 # library(R6)
 #
 # trait_info <- data.frame(year = c(2020, 2020, 2021, 2021),
