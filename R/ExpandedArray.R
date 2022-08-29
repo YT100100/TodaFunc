@@ -29,12 +29,16 @@ call_expanded_array <- function() {
         stopifnot(identical(class(diminfo), 'list'))
         stopifnot(length(diminfo) == length(dim))
         for (i in 1:length(dim)) {
+
           diminfo_length_i <- if ('ExpandedArray' %in% class(diminfo[[i]])) {
             diminfo[[i]]$length()
+          } else if ('data.frame' %in% class(diminfo[[i]])) {
+            nrow(diminfo[[i]])
           } else {
             length(diminfo[[i]])
           }
           stopifnot(diminfo_length_i == dim[i])
+
         }
 
         self$array <- array(data = data, dim = dim)
@@ -54,11 +58,17 @@ call_expanded_array <- function() {
 
           index_i <- as.integer(dimnames(new_array)[[i]])
           if ('ExpandedArray' %in% class(old_diminfo[[i]])) {
-            new_diminfo_i <- old_diminfo[[i]]$clone()
-            new_diminfo_i$slice(index_i)
-            new_diminfo[[i]] <- new_diminfo_i$clone()
+
+            new_diminfo[[i]] <- old_diminfo[[i]]$clone()$slice(index_i)
+
+          } else if ('data.frame' %in% class(old_diminfo[[i]])) {
+
+            new_diminfo[[i]] <- old_diminfo[[i]][index_i, ]
+
           } else {
+
             new_diminfo[[i]] <- old_diminfo[[i]][index_i]
+
           }
 
         }
@@ -149,7 +159,9 @@ call_expanded_array <- function() {
 # a$array
 # a$dim
 # a$diminfo
-#
+
+# library(R6)
+# ExpandedArray <- call_expanded_array()
 # x <- ExpandedArray$new(
 #   data = 1:24,
 #   dim = 4:2,
@@ -170,15 +182,47 @@ call_expanded_array <- function() {
 # x$apply(c(1, 3), sum)
 # x$apply(3, sum)
 
-Trait <- R6Class(
 
-  classname = 'Trait',
-  inherit = Expand
+#### Example 1 ####
 
-)
+# library(R6)
+# ExpandedArray <- call_expanded_array()
+#
+# Mesh <- R6Class(
+#
+#   classname = 'Trait',
+#   inherit = ExpandedArray,
+#   public = list(
+#     lat = function() {
+#       substr(self$array, 1, 4)
+#     }
+#
+#   )
+#
+# )
+#
+# mesh <- Mesh$new(100000 + 1:6, diminfo = list(1:6))
+# temp <- ExpandedArray$new(rnorm(24, 24, 3), dim = c(6, 4),
+#                           diminfo = list(mesh, c('tokyo', 'osaka', 'fukukoka', 'nagano')))
+# temp2 <- temp$slice(c(3, 4), )
+# temp2$diminfo
+# temp2$diminfo[[1]]$lat()
 
-Pmat <- R6Class(
-  classname = 'Pmat',
 
-)
-
+#### Example 2 ####
+#
+# library(R6)
+#
+# trait_info <- data.frame(year = c(2020, 2020, 2021, 2021),
+#                          trait_name = c('PH', 'FW', 'PH', 'FD'))
+#
+# traits <- ExpandedArray$new(c('2020_PH', '2020_FW', '2021_PH', '2021_FD'),
+#                             diminfo = list(trait_info))
+# traits
+# traits$slice(c(1, 3))
+#
+# p_mat <- ExpandedArray$new(
+#   pmin(rnorm(32, sd = 0.1) ^ 2, 1), dim = c(8, 4),
+#   diminfo = list(paste0('SNP', 1:8), trait_info))
+# p_mat
+# p_mat$slice(, p_mat$diminfo[[2]]$year == 2021)
