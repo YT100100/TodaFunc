@@ -1,3 +1,12 @@
+#' strsplit() and select splitted elements with index
+#'
+#' @param x The same as strsplit.
+#' @param split The same as strsplit.
+#' @param index An index to be selected.
+#' @param from.tail Weather index should be counted from tail or not.
+#'
+#' @export
+#'
 strsplit.select <- function(x, split, index, from.tail = FALSE) {
 
   x.split <- strsplit(x, split)
