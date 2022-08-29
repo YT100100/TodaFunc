@@ -7,7 +7,7 @@
 #' @importFrom R6 R6Class
 #' @export
 
-expanded_array <- function(data = NA, dim = length(data), diminfo) {
+call_expanded_array <- function() {
 
   ExpandedArray <- R6Class(
 
@@ -123,7 +123,7 @@ expanded_array <- function(data = NA, dim = length(data), diminfo) {
     )
   )
 
-  return(ExpandedArray$new(data, dim, diminfo))
+  return(ExpandedArray)
 
 }
 
@@ -169,3 +169,16 @@ expanded_array <- function(data = NA, dim = length(data), diminfo) {
 # x$apply(1:2, sum)
 # x$apply(c(1, 3), sum)
 # x$apply(3, sum)
+
+Trait <- R6Class(
+
+  classname = 'Trait',
+  inherit = Expand
+
+)
+
+Pmat <- R6Class(
+  classname = 'Pmat',
+
+)
+
