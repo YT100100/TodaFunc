@@ -210,12 +210,12 @@ exe_new_proc_pattern <- function(exe_func_list, outdir,
     cat('  Processing starts:', as.character(Sys.time()), '\n')
     cat('  Function:', exe_func_name_i, '\n')
     if (is.null(input_path_vec)) {
-      exe_func_i(outdir_i)
+      exe_func_i(out = outdir_i)
     } else {
       for (j in 1:length(input_path_i)) {
         cat('  ', names(input_path_vec)[j], ': ', input_path_i[j], '\n', sep = '')
       }
-      exe_func_i(input_path_i, outdir_i)
+      exe_func_i(input = input_path_i, out = outdir_i)
     }
 
     # output execution patterns
