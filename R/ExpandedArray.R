@@ -119,6 +119,7 @@ call_expanded_array <- function() {
         new_exparray <- self$clone()
         new_exparray$array   <- new_exparray$array[..., drop = FALSE]
         new_exparray$dim     <- dim(new_exparray$array)
+        if (any(new_exparray$dim == 0)) warning('No data is selected.')
         new_exparray$diminfo <- new_exparray$slice_diminfo(new_exparray$array)
         new_exparray$update_dimnames()
         return(new_exparray)
