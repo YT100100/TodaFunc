@@ -126,9 +126,9 @@ call_expanded_array <- function() {
 
       },
 
-      apply = function(margin, fun) {
+      apply = function(margin, fun, ...) {
 
-        new_data    <- apply(self$array, margin, fun)
+        new_data    <- apply(self$array, margin, fun, ...)
         new_dim     <- if (length(margin) == 1) length(new_data) else dim(new_data)
         new_diminfo <- self$diminfo[margin]
         return(ExpandedArray$new(new_data, new_dim, new_diminfo))
