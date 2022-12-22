@@ -4,6 +4,7 @@
 #'
 #' @importFrom R6 R6Class
 #' @export
+#'
 
 empty_expanded_array <- function(diminfo) {
 

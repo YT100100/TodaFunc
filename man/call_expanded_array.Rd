@@ -7,6 +7,10 @@
 call_expanded_array()
 }
 \arguments{
+\item{data}{A vector, a matrix or an array.}
+
+\item{dim}{Dimension of data.}
+
 \item{diminfo}{A list of information of the array.}
 }
 \description{
