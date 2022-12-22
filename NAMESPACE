@@ -3,6 +3,7 @@
 export(call_expanded_array)
 export(dir_create_with_file_path)
 export(empty_array)
+export(empty_expanded_array)
 export(exe_new_proc_pattern)
 export(matplot0)
 export(print_rest_time)
