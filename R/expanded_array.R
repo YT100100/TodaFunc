@@ -7,7 +7,7 @@
 #' @export
 #'
 
-empty_expanded_array <- function(data, diminfo) {
+expanded_array <- function(data, diminfo) {
 
   ExpArray <- call_expanded_array()
   ans <- ExpArray$new(data = data, diminfo = diminfo)
