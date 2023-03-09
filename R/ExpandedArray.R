@@ -55,6 +55,16 @@ call_expanded_array <- function() {
 
       length = function() return(length(self$array)),
 
+      info = function(index) {
+
+        if (length(index) == 1) {
+          return(self$diminfo[[index]])
+        } else {
+          return(self$diminfo[index])
+        }
+
+      },
+
       slice_diminfo = function(new_array) {
 
         old_diminfo <- self$diminfo
