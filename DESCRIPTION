@@ -1,7 +1,7 @@
 Package: TodaFunc
 Type: Package
 Title: Convenient R functions for myself
-Version: 0.0.9000
+Version: 0.1.0001
 Author: Yusuke Toda
 Maintainer: Yusuke Toda <yusuke0320.research@gmail.com>
 Description: Convenient R functions for myself
