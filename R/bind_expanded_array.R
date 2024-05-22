@@ -1,3 +1,13 @@
+#' Bind two expanded arrays
+#'
+#' @param exparr1 An expanded array
+#' @param exparr2 An expanded array
+#' @param axis An axis to bind
+#'
+#' @importFrom R6 R6Class
+#' @export
+#'
+
 bind_expanded_array <- function(exparr1, exparr2, axis) {
   # exparr1 <- TodaFunc::expanded_array(
   #   data = array(1:24, dim = c(4, 3, 2)),
@@ -64,14 +74,3 @@ bind_expanded_array <- function(exparr1, exparr2, axis) {
   return(newdat)
 
 }
-
-rbind_exparray <- function(exparr1, exparr2) {
-  bind_expanded_array(exparr1, exparr2, axis = 1)
-}
-cbind_exparray <- function(exparr1, exparr2) {
-  bind_expanded_array(exparr1, exparr2, axis = 2)
-}
-
-bind_exparray <- bind_expanded_array
-cbind_exparray <- cbind_expanded_array
-rbind_exparray <- rbind_expanded_array
