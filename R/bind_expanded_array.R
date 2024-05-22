@@ -33,6 +33,9 @@ bind_expanded_array <- function(exparr1, exparr2, axis) {
   #   diminfo = list(data.frame(a = 1:4), 11:13, 29))
   # axis <- 3
 
+  if (is.null(exparr1)) return(exparr2)
+  if (is.null(exparr2)) return(exparr1)
+
   # exparr1, exparr2を確認
   stopifnot('ExpandedArray' %in% class(exparr1))
   stopifnot('ExpandedArray' %in% class(exparr2))
