@@ -14,3 +14,5 @@ expanded_array <- function(data, diminfo) {
   return(ans)
 
 }
+
+exparray <- expanded_array

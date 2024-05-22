@@ -25,3 +25,5 @@ empty_expanded_array <- function(diminfo) {
   return(ans)
 
 }
+
+empty_exparray <- empty_expanded_array
