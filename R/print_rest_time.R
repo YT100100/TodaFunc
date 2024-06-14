@@ -11,7 +11,7 @@ print_rest_time <- function(iter, n_iter, start_time, n_print) {
 
   if (iter %% n_print == 0) {
 
-    cat('   ', as.character(Sys.time()))
+    cat('   ', as.character(round(Sys.time())))
 
     i_str <- format(iter, width = ceiling(log10(n_iter + 1)))
     cat('   iter:', i_str, '/', n_iter)
